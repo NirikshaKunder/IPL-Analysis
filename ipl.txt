@@ -1,0 +1,8 @@
+create database IPL;
+use IPL;
+create external table bat_cluster(batsman_name varchar(100),cluster int) row format delimited fields terminated by "," stored as textfile;
+create external table bowl_cluster(bowler_name varchar(100),cluster int) row format delimited fields terminated by "," stored as textfile;
+load data local inpath "IPL/bat_clust.csv" overwrite into table bat_cluster;
+load data local inpath "IPL/bowl_clust.csv" overwrite into table bowl_cluster;
+create external table players(batsman_name varchar(100),bowler_name varchar(100),zeros int,ones int,twos int,threes int,fours int,fives int,sixes int,extras int,wickets int,total_balls int,bat_clust int,bowl_clust int) row format delimited fields terminated by "," stored as textfile;
+load data local inpath "IPL/players_clust.csv" overwrite into table players;
